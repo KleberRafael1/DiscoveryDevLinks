@@ -1,22 +1,19 @@
 function toggleMode() {
-  const html = document.documentElement;
-  html.classList.toggle("light");
+  const html = document.documentElement
+  html.classList.toggle("light")
 
-  // pegar a tag img
-  const img = document.querySelector("#profile img")
+  // Atualizar a imagem do perfil conforme o modo
+  updateProfileImage()
 
-  // substituir a imagem
+  // Salvar preferência no localStorage
   if (html.classList.contains("light")) {
-    // se tiver light mode, adicionar a imagem light  
-    img.setAttribute("src", "./assets/avatar-light.png")
+    localStorage.setItem("theme", "light")
   } else {
-    // se tiver sem light mode, manter a imagem normal
-    img.setAttribute("src", "./assets/avatar.png")
+    localStorage.setItem("theme", "dark")
   }
-
 }
 
-function setInitialMode() {
+function updateProfileImage() {
   const html = document.documentElement
   const img = document.querySelector("#profile img")
 
@@ -27,6 +24,16 @@ function setInitialMode() {
   }
 }
 
-// Chamar a função assim que a página carregar
-document.addEventListener("DOMContentLoaded", setInitialMode)
+// Configurar o tema ao carregar a página
+document.addEventListener("DOMContentLoaded", () => {
+  const theme = localStorage.getItem("theme")
 
+  if (theme === "light") {
+    document.documentElement.classList.add("light")
+  } else {
+    document.documentElement.classList.remove("light")
+  }
+
+  // Atualizar a imagem ao iniciar
+  updateProfileImage()
+})
