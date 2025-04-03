@@ -16,3 +16,17 @@ function toggleMode() {
 
 }
 
+function setInitialMode() {
+  const html = document.documentElement
+  const img = document.querySelector("#profile img")
+
+  if (html.classList.contains("light")) {
+    img.setAttribute("src", "./assets/avatar-light.png")
+  } else {
+    img.setAttribute("src", "./assets/avatar.png")
+  }
+}
+
+// Chamar a função assim que a página carregar
+document.addEventListener("DOMContentLoaded", setInitialMode)
+
